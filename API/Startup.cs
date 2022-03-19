@@ -42,7 +42,7 @@ namespace PetSitting
                 configuration.RootPath = "ClientAp/dist";
             });
             services.AddCors();
-            //services.AddIdentityServices(config);
+            services.AddIdentityServices(config);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PetSitting", Version = "v1" });
