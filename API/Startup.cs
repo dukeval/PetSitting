@@ -14,6 +14,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Helpers;
+using API.Extensions;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace PetSitting
 {
@@ -30,18 +33,14 @@ namespace PetSitting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(config.GetConnectionString("DefaultConnection"));
-            });
 
-            //services.AddApplicationServices(config);
+            services.AddApplicationServices(config);
 
             services.AddControllers();
-            /*services.AddSpaStaticFiles(configuration =>
+            services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientAp/dist";
-            });*/
+            });
             services.AddCors();
             //services.AddIdentityServices(config);
             services.AddSwaggerGen(c =>
@@ -73,14 +72,14 @@ namespace PetSitting
                 endpoints.MapControllers();
             });
 
-            /*app.UseSpa(spa =>
+            app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });*/
+            });
         }
     }
 }

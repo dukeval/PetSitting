@@ -1,9 +1,11 @@
 using System;
 using API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetSitting.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SittersController : ControllerBase
