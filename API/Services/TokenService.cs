@@ -8,10 +8,11 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Entities;
+using PetSitting.Interfaces;
 
 namespace API.Services
 {
-    public class TokenService
+    public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey key;
 

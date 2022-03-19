@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTO;
 using API.Entities;
-using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PetSitting.Models;
+using PetSitting.Interfaces;
 
 namespace API.Controllers
 {
@@ -19,9 +18,9 @@ namespace API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly DataContext dataContext;
-        private readonly TokenService tokenService;
+        private readonly ITokenService tokenService;
 
-        public AccountController(DataContext dataContext, TokenService tokenService)
+        public AccountController(DataContext dataContext, ITokenService tokenService)
         {
             this.dataContext = dataContext;
             this.tokenService = tokenService;

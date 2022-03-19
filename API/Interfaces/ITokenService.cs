@@ -1,9 +1,9 @@
-using PetSitting.Models;
+using API.Entities;
 
 namespace PetSitting.Interfaces
 {
     public interface ITokenService
     {
-        string createToken(UserCredential user);
+        string CreateToken(AppUser user);
     }
 }
