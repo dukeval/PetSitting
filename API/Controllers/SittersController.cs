@@ -3,7 +3,7 @@ using API.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PetSitting.Controllers
+namespace API.Controllers
 {
     [Authorize]
     [ApiController]

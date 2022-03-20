@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PetSitting.Models
+namespace API.Models
 {
     public class Sitter : User
     {

@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserDTO>> Register(RegistrationDTO registration)
+        public async Task<ActionResult<AccountDTO>> Register(RegistrationDTO registration)
         {
             if (await UserExist(registration.Username))
                 return BadRequest("Username exist.");
@@ -46,16 +46,16 @@ namespace API.Controllers
                 Email = registration.Email
             };
 
-            dataContext.Users.Add(newAccount);
+            dataContext.Accounts.Add(newAccount);
             await dataContext.SaveChangesAsync();
 
-            return new UserDTO { UserName = registration.Username, Token = tokenService.CreateToken(newAccount) };
+            return new AccountDTO { UserName = registration.Username, Token = tokenService.CreateToken(newAccount) };
         }
 
         [HttpGet("login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginUser)
+        public async Task<ActionResult<AccountDTO>> Login(LoginDTO loginUser)
         {
-            var user = await dataContext.Users.SingleOrDefaultAsync(x => x.UserName == loginUser.Username);
+            var user = await dataContext.Accounts.SingleOrDefaultAsync(x => x.UserName == loginUser.Username);
 
             if (user == null) return Unauthorized("Invalid account");
 
@@ -68,7 +68,7 @@ namespace API.Controllers
                 if (hash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
-            return new UserDTO
+            return new AccountDTO
             {
                 UserName = user.UserName,
                 Token = tokenService.CreateToken(user)
@@ -77,12 +77,12 @@ namespace API.Controllers
 
         private async Task<bool> EmailExist(string email)
         {
-            return await dataContext.Users.AnyAsync(x => x.Email.ToLower() == email.ToLower());
+            return await dataContext.Accounts.AnyAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         private async Task<bool> UserExist(string username)
         {
-            return await dataContext.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+            return await dataContext.Accounts.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
         }
     }
 }

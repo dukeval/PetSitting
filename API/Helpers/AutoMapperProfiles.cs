@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTO;
 using API.Entities;
+using API.Models;
 using AutoMapper;
-using PetSitting.Models;
 
 namespace API.Helpers
 {
@@ -13,7 +13,9 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<AppUser, UserDTO>();
+            CreateMap<AppUser, AccountDTO>();
+            CreateMap<User, UserDTO>();
+            CreateMap<Pet, PetDTO>();
         }
     }
 }
