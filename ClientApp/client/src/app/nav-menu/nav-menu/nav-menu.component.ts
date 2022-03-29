@@ -1,6 +1,9 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/User';
+import { take } from 'rxjs/operators';
+import { AppUser } from 'src/app/models/AppUser';
+import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,22 +14,33 @@ export class NavMenuComponent implements OnInit {
   isExpanded = false;
   model:any = {};
   userName: string;
-  user: User;
+  user: AppUser;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public accounts: AccountsService) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    console.log("log-in");
+    this.accounts.login(this.model)
+    .subscribe(res=>{
+      this.accounts.currentUser$.pipe(take(1)).subscribe(act=>{
+       this.user = act;
+        console.log("info",this.user.userName);});
+      this.router.navigateByUrl("/users");
+    });
   }
 
   logout(){
-    console.log("log-out");
+    this.accounts.logout();
+    this.router.navigateByUrl("/");
   }
 
   toggle(){
     this.isExpanded =!this.isExpanded;
+  }
+
+  collapse(){
+    this.isExpanded = false;
   }
 }

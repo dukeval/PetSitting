@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home/home.component';
 import { SittersComponent } from './sitters/sitters/sitters.component';
+import { RegisterComponent } from './register/register/register.component';
+import { RegisterinfoComponent } from './register/registerinfo/registerinfo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SittersComponent } from './sitters/sitters/sitters.component';
     UserListComponent,
     NavMenuComponent,
     HomeComponent,
-    SittersComponent
+    SittersComponent,
+    RegisterComponent,
+    RegisterinfoComponent
   ],
   imports: [
     BrowserModule,

@@ -52,7 +52,7 @@ namespace API.Controllers
             return new AccountDTO { UserName = registration.Username, Token = tokenService.CreateToken(newAccount) };
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<AccountDTO>> Login(LoginDTO loginUser)
         {
             var user = await dataContext.Accounts.SingleOrDefaultAsync(x => x.UserName == loginUser.Username);
