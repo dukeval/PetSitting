@@ -3,5 +3,6 @@ export interface User{
     age: number;
     city: string;
     state: string;
+    picture: string;
     pets: string[];
 }

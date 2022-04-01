@@ -15,10 +15,12 @@ export class NavMenuComponent implements OnInit {
   model:any = {};
   userName: string;
   user: AppUser;
+  loggedIn = false;
 
   constructor(private router: Router, public accounts: AccountsService) { }
 
   ngOnInit(): void {
+    this.getCurrentUser();
   }
 
   login(){
@@ -26,7 +28,7 @@ export class NavMenuComponent implements OnInit {
     .subscribe(res=>{
       this.accounts.currentUser$.pipe(take(1)).subscribe(act=>{
        this.user = act;
-        console.log("info",this.user.userName);});
+      });
       this.router.navigateByUrl("/users");
     });
   }
@@ -42,5 +44,15 @@ export class NavMenuComponent implements OnInit {
 
   collapse(){
     this.isExpanded = false;
+  }
+
+  getCurrentUser(){
+    this.accounts.currentUser$.subscribe(user=>{
+      this.loggedIn = !!user;
+    },error=>{
+      console.log(error);
+      
+    }
+    )
   }
 }

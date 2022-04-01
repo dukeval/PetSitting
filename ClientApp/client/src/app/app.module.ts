@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home/home.component';
 import { SittersComponent } from './sitters/sitters/sitters.component';
 import { RegisterComponent } from './register/register/register.component';
 import { RegisterinfoComponent } from './register/registerinfo/registerinfo.component';
+import { MembercardComponent } from './users/membercard/membercard.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +22,15 @@ import { RegisterinfoComponent } from './register/registerinfo/registerinfo.comp
     HomeComponent,
     SittersComponent,
     RegisterComponent,
-    RegisterinfoComponent
+    RegisterinfoComponent,
+    MembercardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

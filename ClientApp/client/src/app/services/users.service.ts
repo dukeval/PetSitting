@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/User';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +14,20 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUsers(){
-    return this.http.get('https://localhost:5001/api/users').pipe(
-      map(usrs =>{
-        console.log('wait');
-        //this.users = usrs;
-        console.log(usrs);
-        //return this.users
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('appUser')).token
+      })
+    }
+    
+    if(this.users.length>0)
+      return of(this.users);
+ 
+    return this.http.get<User[]>('https://localhost:5001/api/users', httpOptions).pipe(
+      map((usrs:User[]) =>{
+        this.users = usrs;
+        return usrs;
       })
     );
-
-    // return this.http.get<any[]>('https://localhost:5001/api/users').subscribe(
-    //   usrs =>{
-    //     console.log('wait');
-    //     //this.users = usrs;
-    //     console.log(usrs);
-    //     //return this.users
-    //   }
-    // );
   }
 }

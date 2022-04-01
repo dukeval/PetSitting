@@ -8,7 +8,7 @@ import { AppUser } from 'src/app/models/AppUser';
   ]
 })
 export class RegisterinfoComponent implements OnInit {
-  model: AppUser=new AppUser();
+  model: AppUser;//=new AppUser();
 
   constructor() { }
 

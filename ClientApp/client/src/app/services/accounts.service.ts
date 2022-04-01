@@ -8,7 +8,7 @@ import { AppUser } from 'src/app/models/AppUser';
   providedIn: 'root'
 })
 export class AccountsService {
-  private currentUserSource = new ReplaySubject<AppUser>();
+  private currentUserSource = new ReplaySubject<AppUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -25,8 +25,14 @@ export class AccountsService {
       }));
   }
 
+  setCurrentUser(user:AppUser){
+    this.currentUserSource.next(user);
+  }
+
   logout(){
     console.log("log-out");
+    this.currentUserSource.next(null);
+    localStorage.removeItem("appUser");
   }
 
   register(){

@@ -20,7 +20,13 @@
         <ul class="navbar-nav flex-grow">
           <ng-container *ngIf="accounts.currentUser$ | async">
             <li class="nav-item">
-              <a href="" class="nav-link">Members</a>
+              <a
+                href=""
+                class="nav-link"
+                [routerLink]="['/users']"
+                routerLinkActive="router-link-active"
+                >Members</a
+              >
             </li>
             <li class="nav-item">
               <a href="" class="nav-link" [routerLink]="['sitters']">Sitters</a>
@@ -35,12 +41,10 @@
         dropdown
       >
         <a class="dropdown-toggle text-light" dropdownToggle
-          >Welcome {{ user.userName | titlecase }}</a
+          >Welcome {{ users.userName | titlecase }}</a
         >
         <div class="dropdown-menu" *dropdownMenu>
-          <a [routerLink]="['/users/edit']" class="dropdown-item"
-            >Edit Profile</a
-          >
+          <a [routerLink]="['/users']" class="dropdown-item">Edit Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>

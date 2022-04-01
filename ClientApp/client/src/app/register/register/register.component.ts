@@ -9,7 +9,7 @@ import { AppUser } from 'src/app/models/AppUser';
   ]
 })
 export class RegisterComponent implements OnInit {
-  model: AppUser = new AppUser();
+  model: AppUser;//new AppUser();
 
   constructor(private route: Router) { }
 
