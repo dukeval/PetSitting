@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent implements OnInit {
   user$: Observable<User[]>;
+  source: string = "User";
 
   constructor(private userService: UsersService) { }
 

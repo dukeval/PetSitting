@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Sitter } from 'src/app/models/Sitter';
+import { SittersService } from 'src/app/services/sitters.service';
 
 @Component({
   selector: 'app-sitters',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SittersComponent implements OnInit {
 
-  constructor() { }
+  sitters$: Observable<Sitter[]>;
+  source: string = "Sitter";
+
+  constructor(private sitterService: SittersService) { }
 
   ngOnInit(): void {
+    this.sitters$ = this.sitterService.getSitters();
   }
 
 }

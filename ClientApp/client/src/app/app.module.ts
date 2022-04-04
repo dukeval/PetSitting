@@ -15,6 +15,8 @@ import { RegisterinfoComponent } from './register/registerinfo/registerinfo.comp
 import { MembercardComponent } from './users/membercard/membercard.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,15 +30,18 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MembercardComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true
+  },{
+    provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true
   }],
   bootstrap: [AppComponent]
 })

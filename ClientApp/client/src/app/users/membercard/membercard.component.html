@@ -12,7 +12,7 @@
         </button>
       </li>
       <li class="list-inline-item">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (click)="viewProfile()">
           <i class="fa fa-envelop"></i>
         </button>
       </li>
@@ -26,7 +26,7 @@
   <div class="card-body p-1">
     <h6 class="card-title text-center mb-1">
       <i class="fa fa-user mr-2"></i>
-      {{ user.name }}
+      {{ user.name }} {{ source }}
     </h6>
   </div>
 </div>

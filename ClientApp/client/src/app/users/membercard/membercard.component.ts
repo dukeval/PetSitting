@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -7,11 +8,16 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./membercard.component.css']
 })
 export class MembercardComponent implements OnInit {
-  @Input() user: User
+  @Input() user: any
+  @Input() source: string
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  viewProfile(){
+    this.router.navigateByUrl(`${this.source}/Profile`);
   }
 
 }
