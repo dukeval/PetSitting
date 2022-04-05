@@ -13,6 +13,16 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
+  getUser(user: string) {
+    var usr = this.users.find(x=> x.username == user);
+
+    if(usr !== undefined){
+      return of(usr);
+    }
+
+    return this.http.get<User>(`https://localhost:5001/api/users/${user}`);
+  }
+
   getUsers(){
 
     if(this.users.length>0)

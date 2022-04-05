@@ -17,11 +17,19 @@ export class SittersService {
     if(this.sitters.length>0)
       return of(this.sitters);
  
-    return this.http.get<Sitter[]>('https://localhost:5001/api/users').pipe(
+    return this.http.get<Sitter[]>('https://localhost:5001/api/sitters').pipe(
       map((usrs:Sitter[]) =>{
         this.sitters = usrs;
         return usrs;
       })
     );
+  }
+
+  getSitter(sitter: string){
+    var savedSittter = this.sitters.find(x=> x.username == sitter);
+    if(savedSittter !== undefined)
+      return of(savedSittter);
+
+    this.http.get<Sitter>(`https://localhost:5001/api/sitters/${sitter}`);
   }
 }

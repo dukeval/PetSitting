@@ -12,5 +12,6 @@ namespace API.Data
 
         public DbSet<AppUser> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Sitter> Sitters { get; set; }
     }
 }

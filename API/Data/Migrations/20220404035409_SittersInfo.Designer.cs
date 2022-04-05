@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace PetSitting.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220404035409_SittersInfo")]
+    partial class SittersInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,15 +62,10 @@ namespace PetSitting.Data.Migrations
                     b.Property<string>("Sex")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SitterId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SitterId");
 
                     b.HasIndex("UserId");
 
@@ -100,41 +97,6 @@ namespace PetSitting.Data.Migrations
                     b.ToTable("Review");
                 });
 
-            modelBuilder.Entity("API.Models.Sitter", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("License")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Ratings")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("State")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("YearsOfExperience")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sitters");
-                });
-
             modelBuilder.Entity("API.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -145,6 +107,10 @@ namespace PetSitting.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -159,14 +125,28 @@ namespace PetSitting.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                });
+
+            modelBuilder.Entity("API.Models.Sitter", b =>
+                {
+                    b.HasBaseType("API.Models.User");
+
+                    b.Property<string>("License")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Ratings")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("YearsOfExperience")
+                        .HasColumnType("INTEGER");
+
+                    b.HasDiscriminator().HasValue("Sitter");
                 });
 
             modelBuilder.Entity("API.Models.Pet", b =>
                 {
-                    b.HasOne("API.Models.Sitter", null)
-                        .WithMany("PetsSpecialty")
-                        .HasForeignKey("SitterId");
-
                     b.HasOne("API.Models.User", "Owner")
                         .WithMany("Pets")
                         .HasForeignKey("UserId")
@@ -183,16 +163,14 @@ namespace PetSitting.Data.Migrations
                         .HasForeignKey("SitterId");
                 });
 
-            modelBuilder.Entity("API.Models.Sitter", b =>
-                {
-                    b.Navigation("PetsSpecialty");
-
-                    b.Navigation("Reviews");
-                });
-
             modelBuilder.Entity("API.Models.User", b =>
                 {
                     b.Navigation("Pets");
+                });
+
+            modelBuilder.Entity("API.Models.Sitter", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

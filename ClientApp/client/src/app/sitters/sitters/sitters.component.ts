@@ -11,7 +11,7 @@ import { SittersService } from 'src/app/services/sitters.service';
 export class SittersComponent implements OnInit {
 
   sitters$: Observable<Sitter[]>;
-  source: string = "Sitter";
+  source: string = "Sitters";
 
   constructor(private sitterService: SittersService) { }
 

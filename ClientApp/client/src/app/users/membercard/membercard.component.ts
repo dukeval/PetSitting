@@ -17,7 +17,7 @@ export class MembercardComponent implements OnInit {
   }
 
   viewProfile(){
-    this.router.navigateByUrl(`${this.source}/Profile`);
+    this.router.navigateByUrl(`${this.source.toLowerCase()}/${this.user.userName}`);
   }
 
 }

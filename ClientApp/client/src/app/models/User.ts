@@ -5,4 +5,5 @@ export interface User{
     state: string;
     picture: string;
     pets: string[];
+    username: string;
 }

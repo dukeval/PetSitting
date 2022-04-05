@@ -1,0 +1,16 @@
+#header{
+    text-align: center;
+    /* margin-left:360px;
+    width:590px; */
+}
+
+#header p, h1{
+    color: black;
+}
+
+/* #header h1{
+    width: 590px;
+}
+#header div{
+    width: 590px;
+} */

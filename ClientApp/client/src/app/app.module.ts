@@ -17,6 +17,10 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { SitterprofileComponent } from './sitters/sitterprofile/sitterprofile.component';
+import { UserprofileComponent } from './users/userprofile/userprofile.component';
+import { EditprofileComponent } from './editprofile/editprofile/editprofile.component';
+import { PetservicesComponent } from './petServices/petservices/petservices.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { ToastrModule } from 'ngx-toastr';
     SittersComponent,
     RegisterComponent,
     RegisterinfoComponent,
-    MembercardComponent
+    MembercardComponent,
+    SitterprofileComponent,
+    UserprofileComponent,
+    EditprofileComponent,
+    PetservicesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
