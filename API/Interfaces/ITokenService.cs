@@ -1,6 +1,6 @@
 using API.Entities;
 
-namespace PetSitting.Interfaces
+namespace API.Interfaces
 {
     public interface ITokenService
     {

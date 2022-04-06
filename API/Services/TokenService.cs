@@ -8,7 +8,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Entities;
-using PetSitting.Interfaces;
+using API.Interfaces;
 
 namespace API.Services
 {

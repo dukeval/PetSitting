@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using API.DTO;
+using API.Interfaces;
 
 namespace API.Controllers
 {
@@ -19,31 +20,27 @@ namespace API.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
+        private readonly IUserRepository userRepository;
 
-        public UsersController(DataContext context, IMapper mapper)
+        public UsersController(DataContext context, IMapper mapper, IUserRepository userRepository)
         {
             this.context = context;
             this.mapper = mapper;
+            this.userRepository = userRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetUsers()
         {
-            var users = await context.Users.Include(pet => pet.Pets).ToListAsync();
-            var newUsersList = mapper.Map<IEnumerable<UserDTO>>(users);
-
-            return Ok(newUsersList);
+            return Ok(await this.userRepository.GetUsersAsync());
         }
 
         [HttpGet("{userName}")]
         public async Task<ActionResult<User>> GetUser(string userName)
         {
-            var usr = await context.Users.Where(x => x.UserName == userName).FirstOrDefaultAsync();
-            if (usr != null)
-            {
-                var newUser = mapper.Map<UserDTO>(usr);
-                return Ok(newUser);
-            }
+            var usrFound = await this.userRepository.GetUserAsync(userName);
+            if (usrFound != null)
+                return Ok(usrFound);
 
             return BadRequest("User not found");
         }
@@ -51,31 +48,18 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddUser(User user)
         {
-            var savedUser = context.Users.Where(x => x.UserName == user.UserName && x.Name == user.Name && x.City == user.City && x.State == user.State && x.Age == user.Age)?.ToList();
-
-            if (savedUser.Count <= 0)//!(await context.Users.ContainsAsync(user)))
-            {
-                context.Users.Add(user);
-                await context.SaveChangesAsync();
-
+            var userAdded = await this.userRepository.CreateUserAsync(user);
+            if (userAdded)
                 return Content("User created");
-            }
 
-            return BadRequest("Unable to add user, that user already exist.");
+            return Content("Unable to add user, that user already exist.");
         }
 
         [HttpPut("{userName}")]
         public async Task<ActionResult> UpdateUser(string userName, User user)
         {
-            // var index = users.FindIndex(x => x.Name == userName);
-            // if (index >= 0)
-            // {
-            //     users[index] = user;
-            //     return Ok(users);
-            // }
-
-            // return BadRequest("Unable to update user");
-            return BadRequest();
+            await this.userRepository.UpdateAsync(userName, user);
+            return Ok();
         }
     }
 }
