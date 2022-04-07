@@ -1,0 +1,41 @@
+<div class="container-fluid py-2">
+  <div class="row featurette">
+    <div class="col-md-4 order-md-1">
+      <img
+        src="{{ profileInfo.picture || './assets/user.png' }}"
+        alt="{{ profileInfo.name }}"
+        class="card-img-top"
+      />
+    </div>
+    <div class="col-md-8 order-md-2">
+      <h3 class="featurette-heading">
+        <b>{{ profileInfo.name }}</b>
+      </h3>
+      <p *ngIf="source=='sitter'">
+        Rating: {{ profileInfo.ratings
+        }}<i class="fa fa-circle ml-2 mr-2"></i>Years of Experience:
+        {{ profileInfo.yearsOfExperience }}
+      </p>
+      <p>Last Active: {{ profileInfo.lastActive }}</p>
+      <p>Location: {{ profileInfo.city }}, {{ profileInfo.state }}</p>
+      <div>
+        <p>About {{ profileInfo.name }}</p>
+        <p>
+          {{ profileInfo.bio }}
+        </p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 pt-3 mb-5 order-md-3">
+      <button
+        class="btn btn-primary btn-lg"
+        type="button"
+        routerLink="/Contact/{{ profileInfo.userName }}"
+      >
+        Contact
+      </button>
+    </div>
+  </div>
+
+  <hr class="featurette-divider" />
+</div>

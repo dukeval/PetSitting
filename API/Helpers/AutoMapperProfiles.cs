@@ -15,7 +15,10 @@ namespace API.Helpers
         {
             CreateMap<AppUser, AccountDTO>();
             CreateMap<User, UserDTO>();
+            CreateMap<Sitter, SitterDTO>();
             CreateMap<Pet, PetDTO>();
+            CreateMap<Review, ReviewDTO>();
+            CreateMap<Photo, PhotoDTO>();
         }
     }
 }

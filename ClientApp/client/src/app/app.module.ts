@@ -21,6 +21,7 @@ import { SitterprofileComponent } from './sitters/sitterprofile/sitterprofile.co
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
 import { EditprofileComponent } from './editprofile/editprofile/editprofile.component';
 import { PetservicesComponent } from './petServices/petservices/petservices.component';
+import { ProfileComponent } from './profile/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PetservicesComponent } from './petServices/petservices/petservices.comp
     SitterprofileComponent,
     UserprofileComponent,
     EditprofileComponent,
-    PetservicesComponent
+    PetservicesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
@@ -9,6 +8,8 @@ namespace API.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
+        public string Bio { get; set; }
+        public string Picture { get; set; }
         public int Age { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -16,7 +17,7 @@ namespace API.Models
         public int Ratings { get; set; }
         public List<Review> Reviews { get; set; }
         public int YearsOfExperience { get; set; }
-
         public string License { get; set; }
+        public DateTime LastActive { get; set; }
     }
 }

@@ -26,10 +26,11 @@ export class SittersService {
   }
 
   getSitter(sitter: string){
-    var savedSittter = this.sitters.find(x=> x.username == sitter);
-    if(savedSittter !== undefined)
+    var savedSittter = this.sitters.find(x=> x.userName == sitter);
+    if(savedSittter !== undefined){      
       return of(savedSittter);
+    }
 
-    this.http.get<Sitter>(`https://localhost:5001/api/sitters/${sitter}`);
+    return this.http.get<Sitter>(`https://localhost:5001/api/sitters/${sitter}`);
   }
 }

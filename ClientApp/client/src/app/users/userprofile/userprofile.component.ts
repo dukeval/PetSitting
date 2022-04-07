@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UserprofileComponent implements OnInit {
   user: User;
+  source: "user";
 
   constructor(private userService: UsersService, private route: ActivatedRoute) { }
 
