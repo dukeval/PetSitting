@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTO;
 using API.Interfaces;
+using API.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,7 @@ namespace API.Data
 
         public async Task<SitterDTO> GetSitterAsync(string userName)
         {
-            var sitters = await this.context.Sitters.Where(x => x.UserName == userName).Include(pet => pet.PetsSpecialty).FirstOrDefaultAsync();
+            var sitters = await this.context.Sitters.Where(x => x.UserName.ToLower() == userName.ToLower()).Include(pet => pet.PetsSpecialty).FirstOrDefaultAsync();
             if (sitters != null)
             {
                 var sitter = this.mapper.Map<SitterDTO>(sitters);
@@ -38,6 +39,18 @@ namespace API.Data
             var listOfSitters = this.mapper.Map<IEnumerable<SitterDTO>>(sitters);
 
             return listOfSitters;
+        }
+
+        public async Task<SitterDTO> CreateSitterAsync(Sitter sitter)
+        {
+            var sitterFound = await GetSitterAsync(sitter.UserName);
+
+            if (sitterFound != null)
+                return null;
+
+            this.context.Sitters.Add(sitter);
+            await this.context.SaveChangesAsync();
+            return this.mapper.Map<SitterDTO>(sitter);
         }
     }
 }

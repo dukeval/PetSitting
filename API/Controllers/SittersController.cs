@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using API.DTO;
 using System.Linq;
 using API.Interfaces;
+using API.Models;
 
 namespace API.Controllers
 {
@@ -44,6 +45,16 @@ namespace API.Controllers
             }
 
             return BadRequest("Invalid user");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddSitter(Sitter sitter)
+        {
+            var sitterAdded = await this.sitterRepository.CreateSitterAsync(sitter);
+            if (sitterAdded != null)
+                return Content("Sitter created");
+
+            return Content("Unable to add sitter, that sitter already exist.");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTO;
+using API.Models;
 
 namespace API.Interfaces
 {
@@ -10,5 +11,6 @@ namespace API.Interfaces
     {
         Task<IEnumerable<SitterDTO>> GetSittersAsync();
         Task<SitterDTO> GetSitterAsync(string userName);
+        Task<SitterDTO> CreateSitterAsync(Sitter sitter);
     }
 }

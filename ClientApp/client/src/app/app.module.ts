@@ -22,6 +22,7 @@ import { UserprofileComponent } from './users/userprofile/userprofile.component'
 import { EditprofileComponent } from './editprofile/editprofile/editprofile.component';
 import { PetservicesComponent } from './petServices/petservices/petservices.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot(),
+    NgxGalleryModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true
