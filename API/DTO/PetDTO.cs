@@ -11,6 +11,7 @@ namespace API.DTO
         public string Breed { get; set; }
         public string Sex { get; set; }
         public int Age { get; set; }
+        public ICollection<PhotoDTO> Photos { get; set; }
 
     }
 }

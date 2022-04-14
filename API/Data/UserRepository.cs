@@ -37,7 +37,7 @@ namespace API.Data
 
         public async Task<UserDTO> GetUserAsync(string userName)
         {
-            var usr = await context.Users.Where(x => x.UserName == userName).FirstOrDefaultAsync();
+            var usr = await context.Users.Include("Pets.Photos").Where(x => x.UserName == userName).FirstOrDefaultAsync();
             if (usr != null)
             {
                 var newUser = mapper.Map<UserDTO>(usr);
@@ -49,7 +49,7 @@ namespace API.Data
 
         public async Task<IEnumerable<UserDTO>> GetUsersAsync()
         {
-            var users = await context.Users.Include(pet => pet.Pets).ToListAsync();
+            var users = await context.Users.Include("Pets.Photos").ToListAsync();
             var newUsersList = mapper.Map<IEnumerable<UserDTO>>(users);
 
             return newUsersList;

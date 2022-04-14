@@ -16,6 +16,6 @@ namespace API.Models
         public int Age { get; set; }
         public User Owner { get; set; }
         public int UserId { get; set; }
-        public List<Photo> Photos { get; set; }
+        public ICollection<Photo> Photos { get; set; }
     }
 }
